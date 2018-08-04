@@ -9,7 +9,7 @@ import CalendarToday from '@material-ui/icons/CalendarToday';
 import Person from '@material-ui/icons/Person';
 import ReportIcon from '@material-ui/icons/Report';
 
-export const mailFolderListItems = (
+export const mainListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
@@ -44,7 +44,7 @@ export const mailFolderListItems = (
   </div>
 );
 
-export const otherMailFolderListItems = (
+export const otherListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
