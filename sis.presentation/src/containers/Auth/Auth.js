@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Redirect } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
-// import * as actions from '../../store/actions/index';
+import * as actions from '../../store/actions/index';
 import { updateObject, checkValidity } from '../../shared/utility';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -16,6 +16,9 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
+import Spinner from '../../components/UI/Spinner/Spinner';
+
+
 const styles = theme => ({
     root: {
       display: 'flex',
@@ -63,11 +66,39 @@ const styles = theme => ({
 class Auth extends Component {
    
     state = {
-        amount: '',
         password: '',
-        weight: '',
-        weightRange: '',
         showPassword: false,
+        controls: {
+          email: {
+              elementType: 'input',
+              elementConfig: {
+                  type: 'email',
+                  placeholder: 'Mail Address'
+              },
+              value: '',
+              validation: {
+                  required: true,
+                  isEmail: true
+              },
+              valid: false,
+              touched: false
+          },
+          password: {
+              elementType: 'input',
+              elementConfig: {
+                  type: 'password',
+                  placeholder: 'Password'
+              },
+              value: '',
+              validation: {
+                  required: true,
+                  minLength: 6
+              },
+              valid: false,
+              touched: false
+          }
+      },
+      isSignup: false
       };
 
       handleChange = prop => event => {
@@ -82,6 +113,12 @@ class Auth extends Component {
         this.setState(state => ({ showPassword: !state.showPassword }));
       };
 
+      loginHandler = ( event ) => {
+        console.log("this.state.isSignup",this.state.isSignup);
+        
+        event.preventDefault();
+        this.props.onAuth( this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup );
+    }
 
       render() {
         const { classes } = this.props;
@@ -93,6 +130,8 @@ class Auth extends Component {
         <InputLabel htmlFor="input-with-icon-adornment">e-Mail</InputLabel>
         <Input
           id="input-with-icon-adornment"
+          value={this.state.controls.email}
+           
           startAdornment={
             <InputAdornment position="start">
               <AccountCircle />
@@ -106,7 +145,7 @@ class Auth extends Component {
               <Input
                 id="adornment-password"
                 type={this.state.showPassword ? 'text' : 'password'}
-                value={this.state.password}
+                value={this.state.controls.password}
                 onChange={this.handleChange('password')}
                 endAdornment={
                   <InputAdornment position="end">
@@ -121,7 +160,7 @@ class Auth extends Component {
                 }
               />
             </FormControl>
-            <Button variant="contained" size="medium" color="primary" className={classes.button}>
+            <Button variant="contained" size="medium" color="primary" className={classes.button} onClick={this.loginHandler}>
           Log In
         </Button>
             </Card>
@@ -130,26 +169,28 @@ class Auth extends Component {
     }
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         loading: state.auth.loading,
-//         error: state.auth.error,
-//         isAuthenticated: state.auth.token !== null,
-//         buildingBurger: state.burgerBuilder.building,
-//         authRedirectPath: state.auth.authRedirectPath
-//     };
-// };
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null,
+        // buildingBurger: state.burgerBuilder.building,
+        authRedirectPath: state.auth.authRedirectPath
+    };
+};
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         onAuth: ( email, password, isSignup ) => dispatch( actions.auth( email, password, isSignup ) ),
-//         onSetAuthRedirectPath: () => dispatch( actions.setAuthRedirectPath( '/' ) )
-//     };
-// };
-
-// export default connect( mapStateToProps, mapDispatchToProps )( Auth );
-
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: ( email, password, isSignup ) => dispatch( actions.auth( email, password, isSignup ) ),
+        onSetAuthRedirectPath: () => dispatch( actions.setAuthRedirectPath( '/' ) )
+    };
+};
 Auth.propTypes = {
     classes: PropTypes.object.isRequired,
   };
-export default withStyles(styles)(Auth);
+export default withStyles(styles)(connect( mapStateToProps, mapDispatchToProps )( Auth ));
+
+// Auth.propTypes = {
+//     classes: PropTypes.object.isRequired,
+//   };
+// export default withStyles(styles)(Auth);
