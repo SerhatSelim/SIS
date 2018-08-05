@@ -17,6 +17,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import { Redirect } from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -66,6 +67,7 @@ const styles = theme => ({
 class Auth extends Component {
    
     state = {
+        email: '',
         password: '',
         showPassword: false,
         controls: {
@@ -117,12 +119,19 @@ class Auth extends Component {
         console.log("this.state.isSignup",this.state.isSignup);
         
         event.preventDefault();
-        this.props.onAuth( this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup );
+        this.props.onAuth( this.state.email, this.state.password, this.state.isSignup );
     }
 
       render() {
         const { classes } = this.props;
     
+        let authRedirect = null;
+        if ( this.props.isAuthenticated ) {
+          authRedirect = <Redirect to={this.props.authRedirectPath} />
+      }
+
+
+
         return (
           <div className={classes.root}>
           <Card className={classes.card}>
@@ -130,8 +139,8 @@ class Auth extends Component {
         <InputLabel htmlFor="input-with-icon-adornment">e-Mail</InputLabel>
         <Input
           id="input-with-icon-adornment"
-          value={this.state.controls.email}
-           
+          value={this.state.email}
+          onChange={this.handleChange('email')}
           startAdornment={
             <InputAdornment position="start">
               <AccountCircle />
@@ -145,7 +154,7 @@ class Auth extends Component {
               <Input
                 id="adornment-password"
                 type={this.state.showPassword ? 'text' : 'password'}
-                value={this.state.controls.password}
+                value={this.state.password}
                 onChange={this.handleChange('password')}
                 endAdornment={
                   <InputAdornment position="end">
@@ -174,7 +183,6 @@ const mapStateToProps = state => {
         loading: state.auth.loading,
         error: state.auth.error,
         isAuthenticated: state.auth.token !== null,
-        // buildingBurger: state.burgerBuilder.building,
         authRedirectPath: state.auth.authRedirectPath
     };
 };
