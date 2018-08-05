@@ -10,6 +10,10 @@ const asyncAuth = asyncComponent(() => {
   return import('./containers/Auth/Auth');
 });
 
+const asyncCourses = asyncComponent(() => {
+  return import('./containers/Courses/Courses');
+});
+
 class App extends Component {
 
   componentDidMount () {
@@ -17,13 +21,35 @@ class App extends Component {
   }
 
   render() {
+    let routes = (
+      
+        <Auth/>
+      
+    );
+    if ( this.props.isAuthenticated ) {
+      routes = (
+        <Layout>
+        <Switch>
+          <Route path="/courses" component={asyncCourses} />
+        
+          <Redirect to="/" />
+        </Switch>
+        </Layout>
+      );
+    }
+
     return (
       // <div>
       //   <Layout/>
       // </div>
+      // <div>
+      //   <Auth/>
+      // </div>
       <div>
-        <Auth/>
-      </div>
+      
+        {routes}
+       
+    </div>
     );
   }
 }
