@@ -16,6 +16,11 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import { mainListItems, otherListItems } from './tileData';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Logout from '../../containers/Auth/Logout/Logout';
+import { Route } from 'react-router-dom';
+import * as actions from '../../store/actions/index';
+import { connect } from 'react-redux';
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -108,6 +113,14 @@ class MiniDrawer extends React.Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+
+  logOutHandler = ( event ) => {
+    console.log("dede");
+    
+    event.preventDefault();
+    this.props.onLogout();
+}
+
   render() {
     const { classes, theme } = this.props;
     const { auth, anchorEl } = this.state;
@@ -168,7 +181,7 @@ class MiniDrawer extends React.Component {
                   onClose={this.handleClose}
                 >
                   <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>Log out</MenuItem>
+                  <MenuItem onClick={this.logOutHandler}>Log out</MenuItem>
                 </Menu>
           </div>
           <Divider />
@@ -190,4 +203,17 @@ MiniDrawer.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(MiniDrawer);
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogout: () => dispatch(actions.logout())
+  };
+};
+
+
+export default withStyles(styles, { withTheme: true })(connect( mapStateToProps,  mapDispatchToProps )(MiniDrawer));
