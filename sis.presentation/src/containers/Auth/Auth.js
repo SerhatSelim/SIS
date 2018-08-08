@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Redirect } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
-import * as actions from '../../store/actions/index';
+import * as actions from '../../store/actions';
 import { updateObject, checkValidity } from '../../shared/utility';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -16,8 +16,9 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
-import Spinner from '../../components/UI/Spinner/Spinner';
+import Indicator from '../../components/UI/Indicator/Indicator';
 import { Redirect } from 'react-router-dom';
+
 
 
 const styles = theme => ({
@@ -136,7 +137,7 @@ class Auth extends Component {
           <div className={classes.root}>
           <Card className={classes.card}>
            <FormControl className={classNames(classes.margin, classes.textField)}>
-        <InputLabel htmlFor="input-with-icon-adornment">e-Mail</InputLabel>
+        <InputLabel htmlFor="input-with-icon-adornment">e-Mail  admin@sis.com</InputLabel>
         <Input
           id="input-with-icon-adornment"
           value={this.state.email}
