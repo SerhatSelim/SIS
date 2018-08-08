@@ -137,7 +137,7 @@ class Auth extends Component {
           <div className={classes.root}>
           <Card className={classes.card}>
            <FormControl className={classNames(classes.margin, classes.textField)}>
-        <InputLabel htmlFor="input-with-icon-adornment">e-Mail</InputLabel>
+        <InputLabel htmlFor="input-with-icon-adornment">e-Mail  admin@sis.com</InputLabel>
         <Input
           id="input-with-icon-adornment"
           value={this.state.email}
