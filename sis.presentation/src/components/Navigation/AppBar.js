@@ -194,9 +194,9 @@ class MiniDrawer extends React.Component {
         </Drawer>
         <main className={classes.content}>
             <div className={classes.toolbar} />
-            <Typography noWrap>
+            {/* <Typography noWrap>
               {"You think water moves fast? You should see ice."}
-            </Typography>
+            </Typography> */}
             <Route path="/courses" component={Courses} />
             <Route path="/exams" component={Exams} />
           </main>

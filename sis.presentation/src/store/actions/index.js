@@ -4,6 +4,9 @@ export {
     setAuthRedirectPath,
     authCheckState
 } from './auth';
+
 export {
-    addCourses
-} from './courses';
+    addCourses,
+    addCoursesInit,
+    fetchCourses,
+} from './course';
