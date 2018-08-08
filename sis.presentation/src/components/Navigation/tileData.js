@@ -8,15 +8,18 @@ import LibraryAdd from '@material-ui/icons/LibraryAdd';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import Person from '@material-ui/icons/Person';
 import ReportIcon from '@material-ui/icons/Report';
+import {Link} from 'react-router-dom';
 
 export const mainListItems = (
   <div>
+    <Link to="/courses">
     <ListItem button>
       <ListItemIcon>
         <LibraryBooks />
       </ListItemIcon>
       <ListItemText primary="Courses" />
     </ListItem>
+    </Link>
     <ListItem button>
       <ListItemIcon>
         <LibraryAdd />
@@ -29,12 +32,14 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Add Courses by Staff" />
     </ListItem>
+    <Link to="/exams">
     <ListItem button>
       <ListItemIcon>
         <CalendarToday />
       </ListItemIcon>
       <ListItemText primary="Exams" />
     </ListItem>
+    </Link>
     <ListItem button>
       <ListItemIcon>
         <FormatListNumbered />
