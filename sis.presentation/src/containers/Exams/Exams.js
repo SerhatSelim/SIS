@@ -4,13 +4,13 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
 
 
-class Courses extends Component {
+class Exams extends Component {
     
 
     render () {
          
         return (
-            <div>dede</div>
+            <div>exams</div>
         );
     }
 }
@@ -29,5 +29,5 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)( Courses );
-export default  Courses ;
+// export default connect(mapStateToProps, mapDispatchToProps)( Exams );
+export default  Exams ;

@@ -17,9 +17,11 @@ import { mainListItems, otherListItems } from './tileData';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Logout from '../../containers/Auth/Logout/Logout';
-import { Route } from 'react-router-dom';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
+import Courses from '../../containers/Courses/Courses';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Exams from '../../containers/Exams/Exams';
 
 const drawerWidth = 240;
 
@@ -127,6 +129,7 @@ class MiniDrawer extends React.Component {
     const open = Boolean(anchorEl);
 
     return (
+      <Router>
       <div className={classes.root}>
         <AppBar
           position="absolute"
@@ -190,10 +193,15 @@ class MiniDrawer extends React.Component {
           <List>{otherListItems}</List>
         </Drawer>
         <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Typography noWrap>{'Welcome to ABC University Student Information System'}</Typography>
-        </main>
+            <div className={classes.toolbar} />
+            <Typography noWrap>
+              {"You think water moves fast? You should see ice."}
+            </Typography>
+            <Route path="/courses" component={Courses} />
+            <Route path="/exams" component={Exams} />
+          </main>
       </div>
+      </Router>
     );
   }
 }
