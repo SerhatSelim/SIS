@@ -24,8 +24,19 @@ const styles = theme => ({
 
 const course = ( props ) => {
     const data = [];
-    data.push(props);
-    
+    // data.push(props.course);
+    for ( let item in props.course ) {
+      data.push(
+          {
+            Name: props.course[item].Name,
+            Credit:props.course[item].Credit,
+            Exams:props.course[item].Exams,
+            Hours:props.course[item].Hours,
+            Semester:props.course[item].Semester,
+            id:props.course[item].id
+          }
+      );
+  }
     return (   
         <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -41,14 +52,14 @@ const course = ( props ) => {
         <TableBody>
         {data.map(n => {
             return (
-              <TableRow key={data.id}>
+              <TableRow key={n.id}>
                 <TableCell component="th" scope="row">
-                  {data.Name}
+                  {n.Name}
                 </TableCell>
-                <TableCell numeric>{data.Credit}</TableCell>
-                <TableCell numeric>{data.Exams}</TableCell>
-                <TableCell numeric>{data.Hours}</TableCell>
-                <TableCell numeric>{data.Semester}</TableCell>
+                <TableCell numeric>{n.Credit}</TableCell>
+                <TableCell numeric>{n.Exams}</TableCell>
+                <TableCell numeric>{n.Hours}</TableCell>
+                <TableCell numeric>{n.Semester}</TableCell>
               </TableRow>
                );
             })}
