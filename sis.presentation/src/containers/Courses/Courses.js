@@ -15,16 +15,11 @@ class Courses extends Component {
     render () {
         let courses = <Indicator />;
         if ( !this.props.loading ) {
-            courses = this.props.courses.map( course => (
+            courses =  
                 <Course
-                    key={course.id}
-                    Credit={course.Credit}
-                    Exams={course.Exams}
-                    Hours={course.Hours}
-                    Semester={course.Semester}
-                    Name={course.Name}
+                course={this.props.courses}
                     />
-            ) )
+            
         }
         return (
             <div>
