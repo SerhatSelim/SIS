@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Redirect } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
-import * as actions from '../../store/actions';
+import * as actions from '../../store/actions/index';
 import { updateObject, checkValidity } from '../../shared/utility';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Course from '../../components/Course/Course';
 import axios from '../../helper/axios';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import * as actions from '../../store/actions';
+import * as actions from '../../store/actions/index';
 import Indicator from '../../components/UI/Indicator/Indicator';
 
 class Courses extends Component {

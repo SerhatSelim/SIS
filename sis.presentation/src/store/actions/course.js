@@ -64,9 +64,8 @@ export const fetchCoursesStart = () => {
 export const fetchCourses = (token, userId) => {
     return dispatch => {
         dispatch(fetchCoursesStart());
-//        const queryParams = 
-//        axios.get( '/courses.json' + queryParams)
-        axios.get( '/Courses.json' )
+        const queryParams = '?auth=' + token;
+        axios.get( '/Courses.json' + queryParams)
             .then( res => {
                 const fetchedCourses = [];
                 for ( let key in res.data ) {
