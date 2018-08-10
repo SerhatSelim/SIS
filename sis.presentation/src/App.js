@@ -28,23 +28,12 @@ class App extends Component {
     );
     if ( this.props.isAuthenticated ) {
       routes = (
-        <Layout>
-        <Switch>
-          <Route path="/courses" component={asyncCourses} />
-        
-          <Redirect to="/" />
-        </Switch>
-        </Layout>
+        <Layout/>
       );
     }
 
     return (
-      // <div>
-      //   <Layout/>
-      // </div>
-      // <div>
-      //   <Auth/>
-      // </div>
+   
       <div>
       
         {routes}

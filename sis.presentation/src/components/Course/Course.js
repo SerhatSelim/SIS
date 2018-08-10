@@ -23,7 +23,7 @@ const styles = theme => ({
 const course = ( props ) => {
   const { classes } = props;
     const data = [];
-    // data.push(props.course);
+     
     for ( let item in props.course ) {
       data.push(
           {
