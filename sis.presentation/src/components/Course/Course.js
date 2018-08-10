@@ -1,7 +1,5 @@
 import React from 'react';
 
-import classes from './Course.css';
-
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,6 +21,7 @@ const styles = theme => ({
   });
 
 const course = ( props ) => {
+  const { classes } = props;
     const data = [];
     // data.push(props.course);
     for ( let item in props.course ) {

@@ -4,11 +4,11 @@ import { updateObject } from '../../shared/utility';
 const initialState = {
     courses: [],
     loading: false,
-    added: false
+    addedCourse: false
 };
 
 const addCourseInit = ( state, action ) => {
-    return updateObject( state, { added: false } );
+    return updateObject( state, { addedCourse: false } );
 };
 
 const addCourseStart = ( state, action ) => {
@@ -19,7 +19,7 @@ const addCourseSuccess = ( state, action ) => {
     const newCourse = updateObject( action.orderData, { id: action.orderId } );
     return updateObject( state, {
         loading: false,
-        added: true,
+        addedCourse: true,
         courses: state.courses.concat( newCourse )
     } );
 };
